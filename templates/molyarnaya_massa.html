@@ -245,13 +245,13 @@
                 <input type="text" id="element" name="element" class="form-control" placeholder="Например: H2O">
             </div>
             <button type="submit" class="btn btn-primary btn-block" onclick="calculateMass()">Узнать</button>
-            <div id="massResult"></div>
+            <div id="Result"></div>
 
     <script>
         async function calculateMass() {
     const formula = document.getElementById('element').value;
     if (!formula) {
-        document.getElementById('massResult').innerText = 'Ошибка: Формула не должна быть пустой.';
+        document.getElementById('Result').innerText = 'Ошибка: Формула не должна быть пустой.';
         return;
     }
 
@@ -259,16 +259,57 @@
     console.log("Проверяем, существует ли pywebview:", window.pywebview);
 
     if (!window.pywebview) {
-        document.getElementById('massResult').innerText = 'Ошибка: pywebview не инициализирован.';
+        document.getElementById('Result').innerText = 'Ошибка: pywebview не инициализирован.';
         return;
     }
 
     try {
         const result = await window.pywebview.api.molecular_mass(formula);
-        document.getElementById('massResult').innerText = 'Молекулярная масса: ' + result;
+        console.log("Результат от сервера:", result);
+        displayResult(result, formula);
     } catch (err) {
-        document.getElementById('massResult').innerText = 'Ошибка: ' + err;
+        document.getElementById('Result').innerText = 'Ошибка: ' + err;
     }
+}
+
+function displayResult(data, formula) {
+    const resultDiv = document.getElementById('Result');
+    resultDiv.innerHTML = '';
+
+    if (data.round_mass) {
+        resultDiv.innerHTML += `<p class="text-center mt-3">Молярная масса ${formula}: ${data.round_mass} г/моль</p>`;
+    } else {
+        console.log("configuration_string2 отсутствует в данных:", data); // Отладочное сообщение
+    }
+
+if (data.element_details && Array.isArray(data.element_details)) {
+    const details = data.element_details;
+
+    // Перебираем массив элементов
+    details.forEach(elementArray => {
+        if (elementArray.length >= 4) {
+            const element = elementArray[0]; // Имя элемента
+            const mass = elementArray[1];     // Масса
+            const count = elementArray[2];    // Количество
+            const total_mass = elementArray[3]; // Общая масса
+
+            // Проверка на наличие значений
+            if (mass !== undefined && count !== undefined && total_mass !== undefined) {
+                resultDiv.innerHTML += `<p class="text-center mt-3">${count} x ${element} (${round(mass, 2)} г/моль): ${round(total_mass, 2)} г, что составляет ${round((total_mass / data.round_mass) * 100, 2)}%</p>`;
+            } else {
+                console.warn(`Отсутствуют необходимые значения для элемента ${element}:`, elementArray);
+            }
+        } else {
+            console.warn(`Недостаточно значений в массиве для элемента:`, elementArray);
+        }
+    });
+} else {
+    console.log("element_details отсутствует или не является массивом в данных:", data);
+}
+
+function round(value, decimals) {
+    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+}
 }
     </script>
         </div>

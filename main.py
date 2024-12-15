@@ -8,6 +8,7 @@ from urllib.parse import quote
 import random
 from datetime import datetime
 import webview
+#import webview.menu as wm
 # импортируем все библиотеки
 
 h = ['']
@@ -187,8 +188,12 @@ class ChemistryCalculator:
             total_mass = element_mass * count
             element_details.append((element, atomic_masses[element], count, total_mass))
             mass += total_mass
+            round_mass = round(mass, 2)
 
-        return round(mass, 2), element_details
+        return {
+            "round_mass": round_mass,
+            "element_details": element_details
+        }
 
 
     def electronic_configuration(self, element):
@@ -353,8 +358,8 @@ class ChemistryCalculator:
 
 
     def get_chemical_equation_solution(self, reaction):
-        '''метод обработчик дописывания хим.реакций. коротко о нем: принимает из основной функции реакцию, вставляет
-        ее в ссылку и возвращает ответ, который парсит(выкидывает все лишнее) только до нужных строчек'''
+        #метод обработчик дописывания хим.реакций. коротко о нем: принимает из основной функции реакцию, вставляет
+        #ее в ссылку и возвращает ответ, который парсит(выкидывает все лишнее) только до нужных строчек
         # Кодируем реакцию для URL
         encoded_reaction = quote(reaction)
 
@@ -438,22 +443,21 @@ class ChemistryCalculator:
         return []
 
 
-
     def rastvory(self, mass_solution, mass_solute, mass_fraction):
         # калькулятор растворимостей
         # Выполняем расчеты
         if mass_solution and mass_solute is not None:
             # Если известны масса раствора и масса вещества, рассчитываем массовую долю
             mass_fraction = (mass_solute / mass_solution) * 100
-    
+
         elif mass_solution and mass_fraction is not None:
             # Если известны масса раствора и массовая доля, рассчитываем массу растворенного вещества
             mass_solute = (mass_fraction / 100) * mass_solution
-    
+
         elif mass_solute and mass_fraction is not None:
             # Если известны масса вещества и массовая доля, рассчитываем массу раствора
             mass_solution = mass_solute / (mass_fraction / 100)
-    
+
         return mass_solution, mass_solute, mass_fraction
 
 
@@ -610,7 +614,7 @@ class ChemistryCalculator:
                     pravilno = 0
                     otvety = 0
                     if right_percent >= 50:
-                        print('Вы победили')
+                        win_page(window)
                     else:
                         print('Вы проиграли')
                     h = ['']
@@ -623,43 +627,6 @@ class ChemistryCalculator:
                 "pravilno": pravilno,
                 "otvety": otvety
             }
-
-
-    def get_substance_html(self, substance_name):
-        # получение имени орг вещества из таблицы на сайте при помощи парсинга этой страницы
-        url = "https://chemer.ru/services/organic/structural"
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-        }
-        session = requests.Session()
-        session.headers.update(headers)
-        response = session.get(url)
-        global klass
-        klass = ''
-        namez = []
-
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, 'html.parser')
-            table = soup.find('table')
-            rows = table.find_all('tr')
-
-            for row in rows:
-                cols = row.find_all('td')
-                if cols:
-                    name = cols[0].text.strip()
-                    klass = cols[1].text.strip()
-                    link = cols[0].find('a')['href']
-                    if substance_name.lower() in name.lower() and substance_name.lower() == name.lower():
-                        substance_url = f"https://chemer.ru/services/organic/{link}"
-                        substance_response = session.get(substance_url)
-                        return substance_response.text, None
-                    elif substance_name.lower() in name.lower() and name.lower()[2:] != substance_name.lower():
-                        namez.append(name)
-                    elif substance_name.lower() in name.lower() and name.lower()[:2] == 'н-' and name.lower()[2:] == substance_name.lower():
-                        substance_url = f"https://chemer.ru/services/organic/{link}"
-                        substance_response = session.get(substance_url)
-                        return substance_response.text, None
-        return None, namez
 
 
     def extract_svg_and_symbols(self, html_code):
@@ -699,8 +666,26 @@ class ChemistryCalculator:
 
         return first_svg_content, isomer_svgs_content, symbol_content, names
 
+
+    def go_back(self, window):
+        window.evaluate_js("window.history.back();")
+
+
+    def go_forward(self, window):
+        window.evaluate_js("window.history.forward();")
+
+
+    def go_home(self, window):
+        window.evaluate_js("window.location.replace('https://127.0.0.1:3000/main.html');")
+
+
+    def win_page(self, window):
+        window.evaluate_js("window.location.replace('https://127.0.0.1:3000/winning.html');")
+
+
     def orghim(self, substance_name):
         def get_substance_html(substance_name):
+            # получение имени орг вещества из таблицы на сайте при помощи парсинга этой страницы
             url = "https://chemer.ru/services/organic/structural"
             headers = {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
@@ -708,6 +693,8 @@ class ChemistryCalculator:
             session = requests.Session()
             session.headers.update(headers)
             response = session.get(url)
+            global klass
+            klass = ''
             namez = []
 
             if response.status_code == 200:
@@ -718,16 +705,20 @@ class ChemistryCalculator:
                 for row in rows:
                     cols = row.find_all('td')
                     if cols:
-                        global klass
                         name = cols[0].text.strip()
                         klass = cols[1].text.strip()
                         link = cols[0].find('a')['href']
-                        if substance_name.lower() == name.lower():
+                        if substance_name.lower() in name.lower() and substance_name.lower() == name.lower():
                             substance_url = f"https://chemer.ru/services/organic/{link}"
                             substance_response = session.get(substance_url)
                             return substance_response.text, None
-                        elif substance_name.lower() in name.lower():
+                        elif substance_name.lower() in name.lower() and name.lower()[2:] != substance_name.lower():
                             namez.append(name)
+                        elif substance_name.lower() in name.lower() and name.lower()[:2] == 'н-' and name.lower()[
+                                                                                                     2:] == substance_name.lower():
+                            substance_url = f"https://chemer.ru/services/organic/{link}"
+                            substance_response = session.get(substance_url)
+                            return substance_response.text, None
             return None, namez
 
         html_code, variants = get_substance_html(substance_name)
@@ -777,22 +768,28 @@ class ChemistryCalculator:
             "variants": variants
         }
 
-
-# Функция для возврата на предыдущую страницу
-def go_back(window):
-    window.evaluate('window.history.back()')
-
-
-# Функция для перехода на следующую страницу
-def go_forward(window):
-    window.evaluate('window.history.forward()')
-
-
 def create_window():
-    icon_path = 'static/favicon.svg'
     calculator = ChemistryCalculator()
-    window = webview.create_window('ChemistryPRO-APP', "templates/main.html", js_api=calculator)
-    webview.start()
+    window = webview.create_window('ChemistryPRO-APP', "templates/main.html", js_api=calculator, zoomable=True)
+
+    '''menu_items = [
+        wm.MenuAction('⌂', lambda: calculator.go_home(window)),
+        wm.MenuAction('🡠', lambda: calculator.go_back(window)),
+        wm.MenuAction('🡢', lambda: calculator.go_forward(window)),
+    ]'''
+
+    def get_current_url(window):
+        # Добавляем обработчик события загрузки страницы в JavaScript
+        current_url = window.get_current_url()
+        print("Current URL:", current_url)
+        if 'minigame.html' in current_url:
+            calculator.minigame('')
+
+        window.evaluate_js('window.location.href')
+
+
+    webview.start(get_current_url, window, ssl=True, http_port=3000)
+
 
 if __name__ == '__main__':
     create_window()
