@@ -13,7 +13,7 @@ package.domain = com.chemistrypro
 source.dir = ./
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas,html,jar,css
+source.include_exts = py,png,jpg,kv,atlas,html,jar,css,svg
 
 # (list) List of inclusions using pattern matching
 source.include_patterns = templates/*, templates/static/*, ./*
@@ -29,7 +29,7 @@ source.exclude_dirs = bin,buildozer
 source.exclude_patterns = new_venv*/*/*
 
 # (str) Application versioning (method 1)
-version = 0.6
+version = 0.7
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -37,7 +37,7 @@ version = 0.6
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,pywebview,bottle,requests,pillow,proxy-tools,typing_extensions,cryptography,chempy,beautifulsoup4
+requirements = python3,kivy,pywebview,bottle,requests,proxy-tools,typing_extensions,cryptography,beautifulsoup4,chempy==1.0.0,sympy==0.7.6,pyjnius
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -51,7 +51,7 @@ icon.filename = %(source.dir)s/templates/static/icon.jpg
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
-orientation = portrait,landscape
+orientation = portrait, landscape
 
 # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
