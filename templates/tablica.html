@@ -107,7 +107,7 @@
 <!-- навигация -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
     <div class="container">
-        <img src="/static/lab.svg" alt="" class="logo-image" width="32" height="32">
+        <img src="static/lab.svg" alt="" class="logo-image" width="32" height="32">
         <a class="navbar-brand" href="main.html">ChemistryPRO</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
@@ -204,6 +204,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="minigame.html"><i class="fa fa-gamepad"></i> Мини-Игра</a>
                 </li>
+                <br>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://chemistrypro.onrender.com/"><font color="gray">В Онлайн режим</font></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="info.html"><font color="gray">О приложении</font></a>
+                </li>
             </ul>
 </div>
 
@@ -225,8 +232,9 @@
     <map name="clickable">
         <area shape="poly" coords="0, 0" title="" href="/">
 	</map>
-	<img usemap="#clickable" src="static/tabl.jpg" class="img-fluid mx-auto d-block" style="max-width: 100%; height: auto;">
+	<img name="image" onclick="Zoom(1.6)" usemap="#clickable" src="static/tabl.jpg" class="img-fluid mx-auto d-block" style="max-width: 100%; height: auto;">
 </div>
+    <p align="center">При нажатии картинка увеличивается.</p>
     <table class="table table-hover table-sm">
       <thead>
         <tr>
@@ -252,48 +260,6 @@
 </div>
 </div>
 </div>
-
-<!-- дополнительная навигационная панель -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-bottom d-none d-lg-flex" style="background-color: #55555e" id="additional-navbar">
-    <div class="container">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link">Внимание! При использовании любых материалов сайта ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
-                <a class="nav-link" href="/aboutme">© 2024 ChemistryPRO. Все права защищены.</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="https://t.me/dontcrymygirl">Telegram</a>
-                <a class="nav-link" href="https://vk.com/i_fanis_hello">ВКонтакте</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tel:89173969499">+79173969499</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<!-- Не фиксированная навигационная панель для мобильных устройств -->
-<nav class="navbar navbar-expand-lg navbar-dark d-lg-none" style="background-color: #55555e" id="additional_navbar2">
-    <div class="container">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link">Внимание! При использовании любых материалов сайта ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
-                <a class="nav-link" href="/aboutme">© Гарипов Ф.Г, 2024</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="https://t.me/dontcrymygirl">Telegram</a>
-                <a class="nav-link" href="https://vk.com/i_fanis_hello">ВКонтакте</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tel:89173969499">+79173969499</a>
-            </li>
-        </ul>
-    </div>
-</nav>
 
 <script>
     function toggleSidebar() {
@@ -360,4 +326,21 @@ document.addEventListener('click', function(event) {
         const dropdown = document.getElementById('dropdownMenu2');
         dropdown.style.display = (dropdown.style.display === 'none' || dropdown.style.display === '') ? 'block' : 'none';
     }
+</script>
+<script>
+    var clicked = false;
+    function Zoom(level) {
+        if (clicked == false) {
+            image.style.transform = `scale(${level})`;
+            image.style.transformOrigin = '0 0';
+            image.style.transformOrigin = 'center * 1.5 center';
+            clicked = true;
+            console.log("Увеличение произошло");
+        } else {
+            image.style.transform = `scale(1.0)`;
+            image.style.transformOrigin = '0 0';
+            clicked = false;
+            console.log("Уменьшение произошло");
+        }
+    };
 </script>

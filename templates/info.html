@@ -216,85 +216,156 @@
 
 <!-- контент дочерних шаблонов -->
 <div class="container my-3">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>ChemistryPRO - Главная страница</title>
     <style>
+        body {
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+        #shrift {
+            color: #000000;
+        }
+        .hero {
+            background: linear-gradient(#b3a5ed, #a5a8f2);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .features {
+            margin: 50px 0;
+        }
         .card {
-            border: 2px solid #5d4fff;
-            border-radius: 10px; /* Закругление углов карточки */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для карточки */
+            border: 2px solid #5d4fff; /* Обводка карточки */
+            border-radius: 10px;
+            background-color: #ffffff; /* Белый фон карточки */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        h2 {
-            color: #343a40; /* Темный цвет заголовка */
+        @media (min-width: 992px) {
+        .card {
+        height: 250px;
         }
-        .form-control {
-            border-radius: 5px; /* Закругление углов текстового поля */
+        }
+        @media (max-width: 991px) {
+        .card {
+        height: auto;
+        }
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Размещаем элементы равномерно */
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .card-text {
+            font-size: 1rem;
+            color: #555;
+        }
+        .cards-group {
+        font-weight: bold;
         }
         .btn-primary {
-            background-color: #5d4fff; /* Цвет кнопки */
-            border: none; /* Удаление рамки */
+            background-color: #5d4fff;
+            border: none;
+            border-radius: 20px;
+            transition: background-color 0.3s;
         }
         .btn-primary:hover {
-            background-color: #0056b3; /* Цвет кнопки при наведении */
+            background-color: #474754;
         }
-        #sidebar A {
-        color: white; /* Цвет ссылок в боковой панели */
+        footer {
+            background-color: #55555e;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        A {
+            color: white; /* Цвет ссылок */
+        }
+        A:visited {
+            color: white; /* Цвет посещенных ссылок */
+        }
+        A:active {
+            color: gray; /* Цвет активных ссылок */
+        }
+        .sidebar:A {
+            color: white;
+        }
+        .photo {
+        text-align: center;
         }
     </style>
+</head>
 <body>
-<div class="container">
-    <div class="card p-4">
-        <h2 class="text-center">Калькулятор растворимости</h2>
-        <p class="text-center">Введите данные:</p>
-            <div class="form-group">
-                <label for="mass_solution">Масса раствора (г):</label>
-                <input class="form-control" type="text" id="mass_solution" name="mass_solution" required>
-                <br>
-                <label for="mass_solute">Масса растворенного вещества (г):</label>
-                <input class="form-control" type="text" id="mass_solute" name="mass_solute" required>
-                <br>
-                <label for="mass_fraction">Массовая доля (в %):</label>
-                <input class="form-control" type="text" id="mass_fraction" name="mass_fraction" required>
-            </div>
-            <button onclick="calculateMass()" type="submit" class="btn btn-primary btn-block">Рассчитать</button>
-        <div id="result" class="mt-4"></div>
-    </div>
+<h2 align="center">О приложении</h2>
+<br>
+<div class="photo">
+    <img style="width: 200px; height: 200px;" src="static/favicon.svg">
 </div>
-
-<script>
-    async function calculateMass() {
-        // Получаем значения из полей ввода
-        const massSolution = document.getElementById('mass_solution').value ? parseFloat(document.getElementById('mass_solution').value) : null;
-        const massSolute = document.getElementById('mass_solute').value ? parseFloat(document.getElementById('mass_solute').value) : null;
-        const massFraction = document.getElementById('mass_fraction').value ? parseFloat(document.getElementById('mass_fraction').value) : null;
-
-        try {
-            const result = await window.pywebview.api.rastvory(massSolution, massSolute, massFraction);
-            displayResults(result);
-        } catch (err) {
-            document.getElementById('result').innerText = 'Ошибка: ' + err;
-        }
-    }
-
-    function displayResults(results) {
-        const [massSolution, massSolute, massFraction] = results;
-        const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = '<h2>Результаты:</h2><ul>';
-
-        if (massSolute !== null) {
-            resultDiv.innerHTML += `<li>Масса растворенного вещества: ${massSolute.toFixed(2)} г</li>`;
-        }
-        if (massSolution !== null) {
-            resultDiv.innerHTML += `<li>Масса раствора: ${massSolution.toFixed(2)} г</li>`;
-        }
-        if (massFraction !== null) {
-            resultDiv.innerHTML += `<li>Массовая доля: ${massFraction.toFixed(2)} %</li>`;
-        }
-
-        resultDiv.innerHTML += '</ul>';
-    }
-</script>
+<br>
+<h2 align="center">ChemistryPRO</h2>
+<br>
+<p align="center">Версия: 0.8 от 27 декабря 2024 года</p>
+<p align="center">Разработчик: Гарипов Ф.Г, 2024</p>
+<p align="center">Краткое описание: ChemistryPRO - это удобное приложения для работы с химией.</p>
+<p align="center">ЯП: Python, HTML, JavaScript; Библиотеки: Pywebview, Chempy, Requests, BeautifulSoup4</p>
+<p align="center">Контакты: внизу страницы ↓</p>
 </body>
+</html>
 </div>
+
+<!-- дополнительная навигационная панель -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-bottom d-none d-lg-flex" style="background-color: #55555e" id="additional-navbar">
+    <div class="container">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link">Внимание! При использовании любых материалов сайта и приложения ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
+                <a class="nav-link" href="/aboutme">© Гарипов Ф.Г, 2024</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="https://t.me/dontcrymygirl">Telegram</a>
+                <a class="nav-link" href="https://vk.com/i_fanis_hello">ВКонтакте</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tel:89173969499">+79173969499</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Не фиксированная навигационная панель для мобильных устройств -->
+<nav class="navbar navbar-expand-lg navbar-dark d-lg-none" style="background-color: #55555e" id="additional_navbar2">
+    <div class="container">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link">Внимание! При использовании любых материалов сайта и приложения ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
+                <a class="nav-link" href="/aboutme">© Гарипов Ф.Г, 2024</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="https://t.me/dontcrymygirl">Telegram</a>
+                <a class="nav-link" href="https://vk.com/i_fanis_hello">ВКонтакте</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tel:89173969499">+79173969499</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <script>
     function toggleSidebar() {

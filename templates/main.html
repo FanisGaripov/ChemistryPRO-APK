@@ -107,7 +107,7 @@
 <!-- навигация -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
     <div class="container">
-        <img src="/static/lab.svg" alt="" class="logo-image" width="32" height="32">
+        <img src="static/lab.svg" alt="" class="logo-image" width="32" height="32">
         <a class="navbar-brand" href="main.html">ChemistryPRO</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
@@ -203,6 +203,13 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="minigame.html"><i class="fa fa-gamepad"></i> Мини-Игра</a>
+                </li>
+                <br>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://chemistrypro.onrender.com/"><font color="gray">В Онлайн режим</font></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="info.html"><font color="gray">О приложении</font></a>
                 </li>
             </ul>
 </div>
@@ -302,16 +309,19 @@
     <!-- Заголовок -->
     <header class="hero">
         <div class="container">
-            <img src="/static/image.webp" alt="" class="logo-image" width="64" height="64">
+            <img src="static/image.webp" alt="" class="logo-image" width="64" height="64">
             <h1>ChemistryPRO</h1>
             <p>Ваш ресурс для изучения химии и химических реакций</p>
             <a href="instruction.html" class="btn btn-light" id="shrift">Узнать больше</a>
+            <br>
+            <br>
+            <a href="https://chemistrypro.onrender.com/" class="btn btn-light" id="shrift">В онлайн режим</a>
         </div>
     </header>
 
     <div class="container features">
         <h2 class="cards-group text-center">Добро Пожаловать!</h2>
-        <p class="text-center">ChemistryPRO — химический портал и ученический проект. Здесь Вы сможете воспользоваться разными функциями: начиная от вычисления Молярной Массы, заканчивая получением Структур Органических Веществ. Сейчас вы пользуетесь мобильным приложением; могут быть ошибки, потому что это порт сайта в нативное приложение.Здесь нет аккаунтов, чатов, регистраций и профилей.</p>
+        <p class="text-center">ChemistryPRO — химический портал и ученический проект. Здесь Вы сможете воспользоваться разными функциями: начиная от вычисления Молярной Массы, заканчивая получением Структур Органических Веществ. Сейчас вы в оффлайн версии приложения.</p>
     </div>
 
     <!-- Основной контент -->
@@ -323,7 +333,7 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Цепочки превращений</h5>
-                        <p class="card-text">Создайте цепочки превращений химических реакций с помощью нашего онлайн-инструмента.</p>
+                        <p class="card-text">Создавайте цепочки превращений химических реакций(требуется интернет-соединение).</p>
                         <a href="get_reaction_chain.html" class="btn btn-primary">Попробовать</a>
                     </div>
                 </div>
@@ -332,7 +342,7 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Уравнивание реакций</h5>
-                        <p class="card-text">Уравнивайте химические реакции разной сложности с помощью нашего онлайн-инструмента.</p>
+                        <p class="card-text">Уравнивайте химические реакции разной сложности.</p>
                         <a href="index.html" class="btn btn-primary">Попробовать</a>
                     </div>
                 </div>
@@ -341,17 +351,8 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Дописывание хим.реакций</h5>
-                        <p class="card-text">Функция дописывания продуктов реакции, работает при помощи API (Beta).</p>
+                        <p class="card-text">Функция дописывания продуктов реакции(требуется интернет-соединение).</p>
                         <a href="complete_reaction.html" class="btn btn-primary">Попробовать</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Молярные массы</h5>
-                        <p class="card-text">Попробуйте наш новый калькулятор молярных масс веществ и химических реакций.</p>
-                        <a href="molyarnaya_massa.html" class="btn btn-primary">Попробовать</a>
                     </div>
                 </div>
             </div>
@@ -368,42 +369,8 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Структура органических веществ</h5>
-                        <p class="card-text">Узнаем структуру органических веществ при помощи названия (Beta).</p>
+                        <p class="card-text">Узнаем структуру органических веществ при помощи названия(требуется интернет-соединение).</p>
                         <a href="orghim.html" class="btn btn-primary">Попробовать</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container features">
-        <h2 class="cards-group text-center">Таблицы</h2>
-        <br>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Таблица Менделеева</h5>
-                        <p class="card-text">Помощь в работе с инструментами сайта.</p>
-                        <a href="tablica.html" class="btn btn-primary">Ознакомиться</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Таблица растворимостей</h5>
-                        <p class="card-text">Помощь при составлении уравнений разной сложности.</p>
-                        <a href="tablica_rastvorimosti.html" class="btn btn-primary">Ознакомиться</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Таблица кислот</h5>
-                        <p class="card-text">В таблице указаны наиболее известные кислоты и их остатки.</p>
-                        <a href="tablica_kislotnosti.html" class="btn btn-primary">Ознакомиться</a>
                     </div>
                 </div>
             </div>
@@ -435,6 +402,39 @@
         </div>
     </div>
 
+    <div class="container features">
+        <h2 class="cards-group text-center">Таблицы</h2>
+        <br>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Таблица Менделеева</h5>
+                        <p class="card-text">Помощь в работе с инструментами приложения.</p>
+                        <a href="tablica.html" class="btn btn-primary">Ознакомиться</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Таблица растворимостей</h5>
+                        <p class="card-text">Помощь при составлении уравнений разной сложности.</p>
+                        <a href="tablica_rastvorimosti.html" class="btn btn-primary">Ознакомиться</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Таблица кислот</h5>
+                        <p class="card-text">В таблице указаны наиболее известные кислоты и их остатки.</p>
+                        <a href="tablica_kislotnosti.html" class="btn btn-primary">Ознакомиться</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container features">
         <h2 class="cards-group text-center">Может быть интересно</h2>
@@ -463,48 +463,6 @@
 </body>
 </html>
 </div>
-
-<!-- дополнительная навигационная панель -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-bottom d-none d-lg-flex" style="background-color: #55555e" id="additional-navbar">
-    <div class="container">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link">Внимание! При использовании любых материалов сайта ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
-                <a class="nav-link" href="/aboutme">© 2024 ChemistryPRO. Все права защищены.</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="https://t.me/dontcrymygirl">Telegram</a>
-                <a class="nav-link" href="https://vk.com/i_fanis_hello">ВКонтакте</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tel:89173969499">+79173969499</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<!-- Не фиксированная навигационная панель для мобильных устройств -->
-<nav class="navbar navbar-expand-lg navbar-dark d-lg-none" style="background-color: #55555e" id="additional_navbar2">
-    <div class="container">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link">Внимание! При использовании любых материалов сайта ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
-                <a class="nav-link" href="/aboutme">© Гарипов Ф.Г, 2024</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="https://t.me/dontcrymygirl">Telegram</a>
-                <a class="nav-link" href="https://vk.com/i_fanis_hello">ВКонтакте</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tel:89173969499">+79173969499</a>
-            </li>
-        </ul>
-    </div>
-</nav>
 
 <script>
     function toggleSidebar() {

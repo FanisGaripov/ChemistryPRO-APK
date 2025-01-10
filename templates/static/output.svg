@@ -177,7 +177,7 @@
 <path d="M 19.5,1.5 L 33.9,8.4 L 37.5,23.5 L 27.5,35.1 L 11.5,35.1 L 1.5,23.5 L 5.1,8.4 z"></path>
 </symbol><symbol id="cycloC8H16">
 <path d="M 12.8,1.5 L 28.8,1.5 L 40.1,12.8 L 40.1,28.8 L 28.8,40.1 L 12.8,40.1 L 1.5,28.8 L 1.5,12.8 z"></path>
-</symbol><svg height="18.49px" version="1.0" width="439.85px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+</symbol><svg height="18.49px" version="1.0" width="347.81px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <use x="0" xlink:href="#CH3" y="0"></use>
 <use x="27.67" xlink:href="#bond1" y="0"></use>
 <use x="46.02" xlink:href="#CH2" y="0"></use>
@@ -192,9 +192,5 @@
 <use x="257.77" xlink:href="#bond1" y="0"></use>
 <use x="276.12" xlink:href="#CH2" y="0"></use>
 <use x="303.79" xlink:href="#bond1" y="0"></use>
-<use x="322.14" xlink:href="#CH2" y="0"></use>
-<use x="349.81" xlink:href="#bond1" y="0"></use>
-<use x="368.16" xlink:href="#CH2" y="0"></use>
-<use x="395.83" xlink:href="#bond1" y="0"></use>
-<use x="414.18" xlink:href="#CH3" y="0"></use>
+<use x="322.14" xlink:href="#CH3" y="0"></use>
 </svg></svg>

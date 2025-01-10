@@ -177,24 +177,20 @@
 <path d="M 19.5,1.5 L 33.9,8.4 L 37.5,23.5 L 27.5,35.1 L 11.5,35.1 L 1.5,23.5 L 5.1,8.4 z"></path>
 </symbol><symbol id="cycloC8H16">
 <path d="M 12.8,1.5 L 28.8,1.5 L 40.1,12.8 L 40.1,28.8 L 28.8,40.1 L 12.8,40.1 L 1.5,28.8 L 1.5,12.8 z"></path>
-</symbol><svg x="6" y="0" height="81.98px" version="1.0" width="224.65px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<use x="0" xlink:href="#CH3" y="31.74"></use>
-<use x="27.67" xlink:href="#bond1" y="31.74"></use>
-<use x="46.02" xlink:href="#CH3" y="0"></use>
-<use x="46.02" xlink:href="#bond1_90" y="14.79"></use>
-<use x="46.02" xlink:href="#C" y="31.74"></use>
-<use x="46.02" xlink:href="#bond1_90" y="46.44"></use>
-<use x="46.02" xlink:href="#CH3" y="63.49"></use>
-<use x="58.13" xlink:href="#bond1" y="31.74"></use>
-<use x="76.48" xlink:href="#CH2" y="31.74"></use>
-<use x="104.15" xlink:href="#bond1" y="31.74"></use>
-<use x="122.5" xlink:href="#CH3" y="0"></use>
-<use x="122.5" xlink:href="#bond1_90" y="14.79"></use>
-<use x="122.5" xlink:href="#C" y="31.74"></use>
-<use x="122.5" xlink:href="#bond1_90" y="46.44"></use>
-<use x="122.5" xlink:href="#CH3" y="63.49"></use>
-<use x="134.61" xlink:href="#bond1" y="31.74"></use>
-<use x="152.96" xlink:href="#CH2" y="31.74"></use>
-<use x="180.63" xlink:href="#bond1" y="31.74"></use>
-<use x="198.98" xlink:href="#CH3" y="31.74"></use>
+</symbol><svg x="6" y="0" height="50.24px" version="1.0" width="244.87px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<use x="0" xlink:href="#CH3" y="0"></use>
+<use x="27.67" xlink:href="#bond1" y="0"></use>
+<use x="46.02" xlink:href="#CH" y="0"></use>
+<use x="46.02" xlink:href="#bond1_90" y="14.7"></use>
+<use x="46.02" xlink:href="#CH3" y="31.75"></use>
+<use x="68.24" xlink:href="#bond1" y="0"></use>
+<use x="86.59" xlink:href="#CH2" y="0"></use>
+<use x="114.26" xlink:href="#bond1" y="0"></use>
+<use x="132.61" xlink:href="#CH" y="0"></use>
+<use x="132.61" xlink:href="#bond1_90" y="14.7"></use>
+<use x="132.61" xlink:href="#CH3" y="31.75"></use>
+<use x="154.83" xlink:href="#bond1" y="0"></use>
+<use x="173.18" xlink:href="#CH2" y="0"></use>
+<use x="200.85" xlink:href="#bond1" y="0"></use>
+<use x="219.2" xlink:href="#CH3" y="0"></use>
 </svg></svg>

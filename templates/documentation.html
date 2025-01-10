@@ -107,7 +107,7 @@
 <!-- навигация -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
     <div class="container">
-        <img src="/static/lab.svg" alt="" class="logo-image" width="32" height="32">
+        <img src="static/lab.svg" alt="" class="logo-image" width="32" height="32">
         <a class="navbar-brand" href="main.html">ChemistryPRO</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
@@ -204,6 +204,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="minigame.html"><i class="fa fa-gamepad"></i> Мини-Игра</a>
                 </li>
+                <br>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://chemistrypro.onrender.com/"><font color="gray">В Онлайн режим</font></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="info.html"><font color="gray">О приложении</font></a>
+                </li>
             </ul>
 </div>
 
@@ -236,9 +243,7 @@
                 <li><a href="#цепочка">Цепочки превращений</a></li>
                 <li><a href="#структура">Структура органических веществ</a></li>
                 <li><a href="#таблицы">Таблицы</a></li>
-                <li><a href="#чат">Общий чат</a></li>
                 <li><a href="#мини-игра">Мини-игра</a></li>
-                <li><a href="#ошибки">Коды ошибок</a></li>
                 <li><a href="#контакты">Контакты</a></li>
             </ul>
         </nav>
@@ -248,47 +253,35 @@
     <main>
         <section id="введение">
             <h2>Введение</h2>
-            <p>ChemistryPro — это веб-приложение, разработанное для изучения Химии школьного уровня 8-11 классов. Оно предлагает пользователям различные функции для взаимодействия с данными о химических элементах.</p>
-            <p>Немного об архитектуре этого сайта: Сайт базирован на языке программирования Python. Python обладает большим количеством библиотек, что является преимуществом этого языка программирования. Flask - это основная библиотека на которой базируется этот сайт. <pre><code>pip install flask</code></pre><p>Фреймворк Flask является универсальным решением для многих сайтов, а также он легок в изучении.
+            <p>ChemistryPro — это нативное webview-приложение, разработанное для изучения Химии школьного уровня 8-11 классов. Оно предлагает пользователям различные функции для взаимодействия с данными о химических элементах.</p>
+            <p>Немного об архитектуре этого сайта: Сайт базирован на языке программирования Python. Python обладает большим количеством библиотек, что является преимуществом этого языка программирования. Pywebview - это основная библиотека на которой базируется приложение, т.к это самый простой вариант порта веб-приложения. <pre><code>pip install pywebview</code></pre><p>Другими словами, pywebview - это мини-браузер внутри языка программирования Python.
             Html-файлы проекта хранятся в папке templates, а изображения в папке static. Структура проекта:</p>
             <pre><code>
 ChemistryPro/
-├── static/                # Статические файлы, такие как CSS и изображения
-│   ├── /upload                         # Аватары
-│   └── fon.jpg...                      # Остальные фото
-│── instance/              # База данных
-│   └── products.db                     # Файл базы данных
 ├── templates/             # Шаблоны HTML
 │   ├── about.html                      # Обо мне
-│   ├── base.html                       # Базовый шаблон
-│   ├── all_profiles.html               # Список всех пользователей сайта
-│   ├── bug.html                        # В случае ошибок
-│   ├── chat.html                       # Чат
 │   ├── complete_reaction.html          # Дописывание реакций
 │   ├── documentation.html              # Документация
-│   ├── edit_profile.html               # Редактирование профиля
 │   ├── electronic_configuration.html   # Электронная конфигурация
 │   ├── get_reaction_chain.html         # Цепочки превращений
 │   ├── index.html                      # Уравнивание реакций
 │   ├── instruction.html                # Инструкция
-│   ├── login.html                      # Логин
 │   ├── main.html                       # Главная страница
 │   ├── minigame.html                   # МиниИгра
 │   ├── molyarnaya_massa.html           # Молярные массы
 │   ├── orghim.html                     # Структура орг. в-в
-│   ├── otherprofile.html               # Профиля пользователей (для пользователя, который просматривает другие профили)
-│   ├── profile.html                    # Профили
-│   ├── register.html                   # Регистрация
 │   ├── tablica.html                    # Таблица Менделеева
 │   ├── tablica_kislotnosti.html        # Таблица кислотностей
 │   ├── tablica_rastvorimosti.html      # Таблица растворимостей
-│   └── winning.html                    # Победа в МиниИгре
-├── server.py              # Главный файл приложения
-├── mod.py                 # Здесь хранятся все модели для базы данных пользователей
-└── requirements.txt       # Список зависимостей(библиотек)
+│   ├── winning.html                    # Победа в МиниИгре
+│   └── static/                         # Статические файлы, такие как CSS и изображения
+│       └── fon.jpg...                  # Фото, доп.файлы и прочее
+├── main.py              # Главный файл приложения
+├── buildozer.spec       # Файл с параметрами для компиляции в apk файл(android)
+└── requirements.txt     # Список зависимостей(библиотек)
             </code></pre>
             <p>Исходный код программы открытый, программу можно найти по ссылке:</p>
-            <a href="https://github.com/FanisGaripov/ChemistryPro">https://github.com/FanisGaripov/ChemistryPro</a>
+            <a href="https://github.com/FanisGaripov/ChemistryPRO-APK">https://github.com/FanisGaripov/ChemistryPRO-APK</a>
         </section>
 
         <section id="функции">
@@ -326,27 +319,7 @@ ChemistryPro/
                 return 'Решение не найдено.'
         else:
             return f"Ошибка при запросе: {response.status_code}"
-
-
-@app.route('/complete_reaction', methods=['GET', 'POST'])
-def complete_reaction_page():
-    # страница, отвечающая за вывод завершенных реакций предыдущим методом
-    react1 = ''
-    user = flask_login.current_user
-    reaction = ''
-    if request.method == 'POST':
-        reaction = request.form.get("chemical_formula", False)
-        react1 = get_chemical_equation_solution(reaction)
-        if '(g)' in react1:
-            react1 = react1.replace('(g)', '')
-        if '(s)' in react1:
-            react1 = react1.replace('(s)', '')
-        if '(aq)' in react1:
-            react1 = react1.replace('(aq)', '')
-        if '(l)' in react1:
-            react1 = react1.replace('(l)', '')
-
-    return render_template('complete_reaction.html', get_chemical_equation_solution=get_chemical_equation_solution, react1=react1, user=user, reaction=reaction)</code></pre>
+            </code></pre>
         </section>
         <section id="уравнивание">
             <h3>2. Уравнивание химических реакций</h3>
@@ -366,27 +339,12 @@ def complete_reaction_page():
     otvet = f"{reactants_str} = {products_str}"
 
     return otvet
-
-
-@app.route('/uravnivanie', methods=['GET', 'POST'])
-def osnova():
-    # функция которая возвращает уравнивание хим.реакций( index.html )
-    user = flask_login.current_user
-    resultat2 = ''
-    if request.method == 'POST':
-        chemical_formula = request.form['chemical_formula']
-        try:
-            resultat2 = f'{chemical_formula}: {uravnivanie(chemical_formula)}'
-            print(resultat2)
-        except:
-            redirect('/')
-    return render_template('index.html', resultat2=resultat2, user=user)
-</code></pre>
+            </code></pre>
         </section>
         <section id="конфигурация">
             <h3>3. Электронная конфигурация</h3>
-            <p>Эта функция позволяет узнать электронную конфигурацию любого вещества без заглядывания в таблицу Менделеева. Не использует других библиотек, кроме flask(python, основная библиотека, на которой держится весь проект). Состоит из трех функций:</p>
-            <pre><code>def electronic_configuration(element):
+            <p>Эта функция позволяет узнать электронную конфигурацию любого вещества без заглядывания в таблицу Менделеева. Не использует других библиотек. Состоит из двух функций:</p>
+        <pre><code>def electronic_configuration(self, element):
     elements_data = {
         'H': 1, 'He': 2, 'Li': 3, 'Be': 4, 'B': 5, 'C': 6, 'N': 7, 'O': 8, 'F': 9, 'Ne': 10,
         'Na': 11, 'Mg': 12, 'Al': 13, 'Si': 14, 'P': 15, 'S': 16, 'Cl': 17, 'Ar': 18, 'K': 19,
@@ -444,104 +402,90 @@ def osnova():
 
     configuration_string2 = ' '.join(configurations1)
 
+    def generate_graphical_representation(configurations):
+        # графическое представление электронной конфигурации
+        representation = []
+        grouped_representation = {}
+
+        for config in configurations:
+            subshell, count = config.split('^')
+            count = int(count)
+
+            if subshell[0] not in grouped_representation:
+                grouped_representation[subshell[0]] = []
+
+            cells = []
+
+            if subshell.endswith('s'):
+                for _ in range(1):
+                    if count > 0:
+                        cells.append('[↑]')
+                        count -= 1
+                    if count > 0:
+                        cells[0] += '[↓]'
+                        count -= 1
+                    else:
+                        cells.append('[ ]')  # Пустая ячейка
+
+            elif subshell.endswith('p'):
+                # 3 p-орбитали
+                for i in range(3):
+                    if count > 0:
+                        cells.append('[↑]')
+                        count -= 1
+                    else:
+                        cells.append('[ ]')  # Пустая ячейка
+
+                for i in range(3):
+                    if count > 0:
+                        cells[i] += '[↓]'
+                        count -= 1
+
+            elif subshell.endswith('d'):
+                # 5 d-орбиталей
+                for i in range(5):
+                    if count > 0:
+                        cells.append('[↑]')
+                        count -= 1
+                    else:
+                        cells.append('[ ]')  # Пустая ячейка
+
+                for i in range(5):
+                    if count > 0:
+                        cells[i] += '[↓]'
+                        count -= 1
+
+            elif subshell.endswith('f'):
+                # 7 f-орбиталей
+                for i in range(7):
+                    if count > 0:
+                        cells.append('[↑]')
+                        count -= 1
+                    else:
+                        cells.append('[ ]')  # Пустая ячейка
+
+                for i in range(7):
+                    if count > 0:
+                        cells[i] += '[↓]'
+                        count -= 1
+
+            grouped_representation[subshell[0]].append(f"{subshell}: " + ' '.join(cells))
+
+        # Сборка финального представления
+        for level in sorted(grouped_representation.keys()):
+            representation.extend(grouped_representation[level])
+
+        return "\n".join(representation)
+
     # Графическое представление(текстовое, используются [↑] и [↓], открывающая и закрывающая скобка - это одна клетка)
     graphic_representation = generate_graphical_representation(configurations)
 
-    return configuration_string, configuration_string2, graphic_representation, atom
-
-
-def generate_graphical_representation(configurations):
-    # графическое представление электронной конфигурации
-    representation = []
-    grouped_representation = {}
-
-    for config in configurations:
-        subshell, count = config.split('^')
-        count = int(count)
-
-        if subshell[0] not in grouped_representation:
-            grouped_representation[subshell[0]] = []
-
-        cells = []
-
-        if subshell.endswith('s'):
-            for _ in range(1):
-                if count > 0:
-                    cells.append('[↑]')
-                    count -= 1
-                if count > 0:
-                    cells[0] += '[↓]'
-                    count -= 1
-                else:
-                    cells.append('[ ]')  # Пустая ячейка
-
-        elif subshell.endswith('p'):
-            # 3 p-орбитали
-            for i in range(3):
-                if count > 0:
-                    cells.append('[↑]')
-                    count -= 1
-                else:
-                    cells.append('[ ]')  # Пустая ячейка
-
-            for i in range(3):
-                if count > 0:
-                    cells[i] += '[↓]'
-                    count -= 1
-
-        elif subshell.endswith('d'):
-            # 5 d-орбиталей
-            for i in range(5):
-                if count > 0:
-                    cells.append('[↑]')
-                    count -= 1
-                else:
-                    cells.append('[ ]')  # Пустая ячейка
-
-            for i in range(5):
-                if count > 0:
-                    cells[i] += '[↓]'
-                    count -= 1
-
-        elif subshell.endswith('f'):
-            # 7 f-орбиталей
-            for i in range(7):
-                if count > 0:
-                    cells.append('[↑]')
-                    count -= 1
-                else:
-                    cells.append('[ ]')  # Пустая ячейка
-
-            for i in range(7):
-                if count > 0:
-                    cells[i] += '[↓]'
-                    count -= 1
-
-        grouped_representation[subshell[0]].append(f"{subshell}: " + ' '.join(cells))
-
-    # Сборка финального представления
-    for level in sorted(grouped_representation.keys()):
-        representation.extend(grouped_representation[level])
-
-    return "\n".join(representation)
-
-
-@app.route('/electronic_configuration', methods=['GET', 'POST'])
-def electronic_configuration_page():
-    # функция, которая отображает страницу электронной конфигурации, предыдущая функция отвечает за обработку ответа
-    element = ''
-    user = flask_login.current_user
-    configuration = ''
-    configuration1 = ''
-    graphic_representation = ''
-    atomic = ''
-    if request.method == 'POST':
-        element = request.form.get("element", False)
-        try:
-            configuration, configuration1, graphic_representation, atomic = electronic_configuration(element)
-        except Exception as e:
-            configuration1, configuration, graphic_representation, atomic = '', '', '', ''
-    return render_template('electronic_configuration.html', configuration=configuration, configuration1=configuration1, graphic_representation=graphic_representation, atomic=atomic, user=user, element=element)
+    return {
+        "configuration_string": configuration_string2,
+        "configuration_string2": configuration_string2,
+        "graphic_representation": graphic_representation,
+        "atom": elements_data[element]
+    }
             </code></pre>
         </section>
         <section id="масса">
@@ -720,207 +664,185 @@ def electronic_configuration_page():
         mass += total_mass
 
     return round(mass, 2), element_details
-
-@app.route('/molyarnaya_massa', methods=['GET', 'POST'])
-def molyar_massa():
-    # метод для вычисления молярной массы и отображения ее на сайте
-    user = flask_login.current_user
-    global resultat, dlyproverki, c
-    resultat = ''
-    otdelno = []
-    formatspisok = ''
-    dlyproverki = 0
-    if request.method == 'POST':
-        chemical_formula = request.form['element']
-        try:
-            dlyproverki, element_details = molecular_mass(chemical_formula)
-            resultat = f"Молярная масса {chemical_formula}: {dlyproverki} г/моль"
-            for element, mass, count, total_mass in element_details:
-                otdelno.append(f"{count} x {element} ({round(mass, 2)} г/моль): {round(total_mass, 2)} г/моль, что составляет {round((round(total_mass, 2) / dlyproverki) * 100, 2)}%")
-        except Exception as e:
-            otdelno.append(f"{e}: такого вещества или соединения не существует")
-    return render_template('molyarnaya_massa.html', resultat=resultat, dlyproverki=dlyproverki, user=user, otdelno=otdelno)
             </code></pre>
         </section>
         <section id="цепочка">
             <h3>5. Цепочки превращений</h3>
             <p>Функция позволяет узнать целую цепочку превращений вещества, а именно какие реакции должны произойти, чтобы получить то или иное вещество. Работает при помощи отправки запроса на сервер chemer.ru . Для реализации потребуется библиотека requests(python). Мы отправляем запрос на сервер, а тот должен нам вернуть html всех реакций. Крайне важен ввод веществ в поле. Т.к данные из поля вводятся в url сайта, то важно чтобы эти данные были отформатированы. Главное требование при вводе: все реакции вводить через знак "=". Например: Al=Al2O3=AlCl3=Al(OH)3=Na3AlO3=Al(NO3)3.</p>
-            <pre><code>def get_reaction_chain(reaction):
+        <pre><code>def get_reaction_chain(self, reaction):
     # цепочка превращений
-    if request.method == 'POST':
-        reaction = request.form.get("chemical_formula", False)
-        url = f"https://chemer.ru/services/reactions/chains/{reaction}"
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-        }
-        session = requests.Session()
-        session.headers.update(headers)
-        response = session.get(url)
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, 'html.parser')
-            content_sections = soup.find_all('section', class_='content')  # Ищем все секции с классом 'content'
-
-            results = []  # Список для хранения первых ответов из каждой секции
-            if content_sections:
-                for content_section in content_sections:
-                    reactions = content_section.find_all('p', class_='resizable-block')  # Ищем все 'p' внутри каждой секции
-                    if reactions:
-                        first_reaction = reactions[0].get_text().strip()  # Берем первый ответ из секции
-                        results.append(first_reaction)  # Добавляем его в результаты
-                    else:
-                        # Если нет реакций с классом 'resizable-block', ищем все 'p' и берем первый из них
-                        all_paragraphs = content_section.find_all('p')
-                        if all_paragraphs:
-                            first_paragraph = all_paragraphs[0].get_text().strip()  # Берем текст первого 'p'
-                            results.append(first_paragraph)
-                        else:
-                            results.append("Нет данных")  # Если нет ни одного 'p', добавляем сообщение
-
-            return results  # Возвращаем список первых ответов из всех секций
-
-
-@app.route('/get_reaction_chain', methods=['GET', 'POST'])
-def get_reaction_chain_page():
-    # страница, которая выводит цепочку превращений, т.е прошлую функцию
-    user = flask_login.current_user
-    react2 = ''
-    reaction = ''
-    if request.method == 'POST':
-        reaction = request.form.get("chemical_formula", False)
-        react2 = get_reaction_chain(reaction)
-
-    return render_template('get_reaction_chain.html', get_reaction_chain=get_reaction_chain, user=user, reaction=reaction, react2=react2)
-            </code></pre>
-        </section>
-            <section id="структура">
-            <h3>6. Структура органических реакций</h3>
-            <p>Функция позволяет найти органическое вещество, а именно его графическое представление. Например: при вводе 2,2-диметилбутан, должны вывестись картинки в формате .svg. Первой такой картинкой будет само вещество, а остальные - все изомеры вещества(или те, что представляет ресурс, на который мы отправляем запрос). Все это реализовано при помощи библиотеки requests(python), т.е мы также отправляем запрос на сайт и он возвращает нам ответ. Несмотря на такую, казалось бы простую идею, код этой части был самым трудным в написании(были убраны <> из всех svg, т.к сайт их не отображает):</p>
-            <pre><code>
-def get_substance_html(substance_name):
-    # получение имени орг вещества из таблицы на сайте при помощи парсинга этой страницы
-    url = "https://chemer.ru/services/organic/structural"
+    url = f"https://chemer.ru/services/reactions/chains/{reaction}"
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
     }
     session = requests.Session()
     session.headers.update(headers)
     response = session.get(url)
-    global klass
-    klass = ''
-    namez = []
 
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
-        table = soup.find('table')
-        rows = table.find_all('tr')
+        inset_divs = soup.find_all('div', class_='inset')  # Ищем все группы
+        reaction_groups = {}  # Словарь для групп реакций
 
-        for row in rows:
-            cols = row.find_all('td')
-            if cols:
-                name = cols[0].text.strip()
-                klass = cols[1].text.strip()
-                link = cols[0].find('a')['href']
-                if substance_name.lower() in name.lower() and substance_name.lower() == name.lower():
-                    substance_url = f"https://chemer.ru/services/organic/{link}"
-                    substance_response = session.get(substance_url)
-                    return substance_response.text, None
-                elif substance_name.lower() in name.lower() and name.lower()[2:] != substance_name.lower():
-                    namez.append(name)
-                elif substance_name.lower() in name.lower() and name.lower()[:2] == 'н-' and name.lower()[2:] == substance_name.lower():
-                    substance_url = f"https://chemer.ru/services/organic/{link}"
-                    substance_response = session.get(substance_url)
-                    return substance_response.text, None
-    return None, namez
+            # Сначала собираем группы из h2
+        for inset_div in inset_divs:
+            product_header = inset_div.find('h2')
+            if product_header:
+                product_text = product_header.get_text().strip()
+                reaction_groups[product_text] = []  # Создаем пустой список для реакций этой группы
+
+        # Теперь собираем реакции и добавляем их в соответствующие группы
+        content_sections = soup.find_all('section', class_='content')  # Ищем все секции с классом 'content'
+        if content_sections:
+            for content_section in content_sections:
+                reactions = content_section.find_all('p', class_='resizable-block')  # Ищем все 'p' внутри каждой секции
+                if reactions:
+                    # Находим соответствующую группу для текущей секции
+                    group_header = content_section.find_previous('div', class_='inset').find('h2')
+                    if group_header:
+                        group_name = group_header.get_text().strip()
+                        for reaction in reactions:
+                            reaction_text = reaction.get_text().strip()  # Извлекаем текст реакции
+                            if group_name in reaction_groups:
+                                reaction_groups[group_name].append(reaction_text)  # Добавляем реакцию в соответствующую группу
+
+            # Формируем окончательный результат
+        final_results = []
+        for group, reactions in reaction_groups.items():
+            final_results.append(f"Как из {group}:")
+            final_results.extend(reactions)  # Добавляем все реакции для данной группы
+
+        return final_results  # Возвращаем сгруппированные реакции
+    else:
+        return [f"Ошибка при запросе: {response.status_code}"]  # Обработка ошибки запроса
+    return []
+            </code></pre>
+        </section>
+            <section id="структура">
+            <h3>6. Структура органических реакций</h3>
+            <p>Функция позволяет найти органическое вещество, а именно его графическое представление. Например: при вводе 2,2-диметилбутан, должны вывестись картинки в формате .svg. Первой такой картинкой будет само вещество, а остальные - все изомеры вещества(или те, что представляет ресурс, на который мы отправляем запрос). Все это реализовано при помощи библиотеки requests(python), т.е мы также отправляем запрос на сайт и он возвращает нам ответ. Несмотря на такую, казалось бы простую идею, код этой части был самым трудным в написании(были убраны <> из всех svg, т.к сайт их не отображает):</p>
+            <pre><code>
+    def extract_svg_and_symbols(self, html_code):
+        soup = BeautifulSoup(html_code, 'html.parser')
+        svg_elements = soup.find_all('svg')
+        symbols = soup.find_all('symbol')
+        names = ''
+
+        if not svg_elements:
+            return None, None, None
+
+        first_svg_content = str(svg_elements[0])
+        if 'width' not in first_svg_content or 'height' not in first_svg_content:
+            first_svg_content = first_svg_content.replace(здесь некоторые параметры)
+
+        isomer_svgs = []
+        spacing = 220  # Расстояние между изомерами
+        max_per_row = 20  # Максимум изомеров в строке
+
+        # Извлечение секции с id='tab1'
+        tab1_section = soup.find('section', id='tab1')
+
+        if tab1_section:
+            svg_elements2 = tab1_section.find_all('svg')
+            names = tab1_section.find_all('a')
+
+            for index, svg in enumerate(svg_elements2):
+                row = index // max_per_row
+                col = index % max_per_row
+                x = col - 1  # Установка x координаты
+                y = row  # Установка y координаты
+                svg_str = str(svg).replace(здесь некоторые параметры)
+                isomer_svgs.append(svg_str)
+
+        isomer_svgs_content = ''.join(isomer_svgs)
+        symbol_content = ''.join(str(symbol) for symbol in symbols)
+
+        return first_svg_content, isomer_svgs_content, symbol_content, names
 
 
-def extract_svg_and_symbols(html_code):
-    # занимается сохранением свг-картинок на сервер
-    soup = BeautifulSoup(html_code, 'html.parser')
-    svg_elements = soup.find_all('svg')
-    symbols = soup.find_all('symbol')
-    names = ''
+    def get_substance_html(self, substance_name):
+        # получение имени орг вещества из таблицы на сайте при помощи парсинга этой страницы
+        url = "https://chemer.ru/services/organic/structural"
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+        }
+        session = requests.Session()
+        session.headers.update(headers)
+        response = session.get(url)
+        global klass
+        klass = ''
+        namez = []
 
-    if not svg_elements:
-        return None, None, None
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            table = soup.find('table')
+            rows = table.find_all('tr')
 
-    first_svg_content = str(svg_elements[0])
-    if 'width' not in first_svg_content or 'height' not in first_svg_content:
-        first_svg_content = first_svg_content.replace('svg', 'svg width="200" height="200"')
-
-    isomer_svgs = []
-    spacing = 220  # Расстояние между изомерами
-    max_per_row = 20  # Максимум изомеров в строке
-
-    # Извлечение секции с id='tab1'
-    tab1_section = soup.find('section', id='tab1')
-
-    if tab1_section:
-        # Получаем все SVG элементы внутри секции
-        svg_elements2 = tab1_section.find_all('svg')
-        names = tab1_section.find_all('a')
-
-        for index, svg in enumerate(svg_elements2):
-            row = index // max_per_row  # Определяем номер строки
-            col = index % max_per_row  # Определяем номер колонки
-            x = col - 1  # Устанавливаем x координату
-            y = row  # Устанавливаем y координату для новой строки
-            svg_str = str(svg).replace('svg', f'svg x="{x}" y="{y}"')  # Устанавливаем координаты
-            isomer_svgs.append(svg_str)
-
-    isomer_svgs_content = ''.join(isomer_svgs)
-    symbol_content = ''.join(str(symbol) for symbol in symbols)
-
-    return first_svg_content, isomer_svgs_content, symbol_content, names
+            for row in rows:
+                cols = row.find_all('td')
+                if cols:
+                    name = cols[0].text.strip()
+                    klass = cols[1].text.strip()
+                    link = cols[0].find('a')['href']
+                    if substance_name.lower() in name.lower() and substance_name.lower() == name.lower():
+                        substance_url = f"https://chemer.ru/services/organic/{link}"
+                        substance_response = session.get(substance_url)
+                        return substance_response.text, None
+                    elif substance_name.lower() in name.lower() and name.lower()[2:] != substance_name.lower():
+                        namez.append(name)
+                    elif substance_name.lower() in name.lower() and name.lower()[:2] == 'н-' and name.lower()[
+                                                                                                 2:] == substance_name.lower():
+                        substance_url = f"https://chemer.ru/services/organic/{link}"
+                        substance_response = session.get(substance_url)
+                        return substance_response.text, None
+        return None, namez
 
 
-@app.route('/orghim', methods=['GET', 'POST'])
-def orghim():
-    # основная страница для работы с методами(предыдущими двумя). Все вместе это ф-ция орг.химии
-    # ее суть в выведении названий веществ и картинок изомеров и самого вещества
-    # изомеров только 10, т.к 70 изомеров декана, например, может сильно нагрузить устройство пользователя и сервер,
-    # который может обрабатывать несколько таких запросов, что приведет к замедлению его работы(он и так бесплатный)
-    global klass
-    combined = ''
-    isomer_files = []
-    variants = ''
-    user = flask_login.current_user
-    substance_name = ''
-    if request.method == 'POST':
-        substance_name = request.form['substance_name']
-        html_code, variants = get_substance_html(substance_name)
+    def orghim(self, substance_name):
+        html_code, variants = self.get_substance_html(substance_name)
 
         if html_code:
-            first_svg, isomers_svg, symbols_svg, names = extract_svg_and_symbols(html_code)
+            first_svg, isomers_svg, symbols_svg, names = self.extract_svg_and_symbols(html_code)
 
             # Сохраняем первую SVG-картинку и символы в файл
             if first_svg:
-                with open('static/output.svg', 'w', encoding='utf-8') as f:
+                svg_file_path = 'static/output.svg'
+                with open('templates/static/output.svg', 'w', encoding='utf-8') as f:
                     f.write(
-                        f"svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>{symbols_svg}{first_svg}/svg")
+                        f"<!--<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>{symbols_svg}{first_svg}</svg>-->")
 
             # Сохраняем изомеры в отдельные файлы
+            isomer_files = []
+            combined = []
             if isomers_svg.strip():
-                isomer_files = []
-                nazvaniya = []
-                for index, svg in enumerate(isomers_svg.split('/svg')):
-                    if index <= 9:
-                        if svg.strip():
-                            file_name = f'static/isomer_{index}.svg'
-                            with open(file_name, 'w', encoding='utf-8') as f:
-                                f.write(f"svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>Х{symbols_svg}{svg}/svg/svg")
-                            filename_without_static = f'isomer_{index}.svg'
-                            isomer_files.append(filename_without_static)
+                for index, svg in enumerate(isomers_svg.split('<!--</svg>-->')):
+                    if index <= 9 and svg.strip():
+                        file_name = f'templates/static/isomer_{index}.svg'
+                        with open(file_name, 'w', encoding='utf-8') as f:
+                            f.write(f"<!--<code><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>{symbols_svg}{svg}</svg></svg>-->")
+                        isomer_files.append(f'isomer_{index}.svg')
 
                 for i, nazv in enumerate(names):
                     if i <= 9:
                         soup = BeautifulSoup(str(nazv), 'html.parser')
                         nazv = soup.a.text
-                        nazvaniya.append(nazv.capitalize())
-                combined = list(zip(nazvaniya, isomer_files))
-
-            return render_template('orghim.html', svg_file='output.svg', isomer_files=isomer_files, substance_name=substance_name, user=user, klass=klass, combined=combined)
-
-    return render_template('orghim.html', svg_file=None, isomer_files=None, nazvaniya=None, user=user, variants=variants, substance_name=substance_name)
+                        combined.append((nazv.capitalize(), isomer_files[i]))
+            return {
+                "svg_file": 'static/output.svg',
+                "isomer_files": isomer_files,
+                "substance_name": substance_name,
+                "klass": klass,
+                "combined": combined,
+                "variants": variants
+            }
+        return {
+            "svg_file": None,
+            "isomer_files": [],
+            "substance_name": substance_name,
+            "klass": None,
+            "combined": [],
+            "variants": variants
+        }
             </code></pre>
         </section>
 
@@ -934,20 +856,7 @@ def orghim():
 
             <h3>3.Таблица кислот и кислотных остатков</h3>
             <p>Страница возвращает кислоты и их остатки, также есть таблица сил кислот: от самой слабой, до самой сильной.</p>
-            <p>Код для всех этих страниц схож, покажу только один:</p>
-            <pre><code>
-@app.route('/tablica', methods=['GET', 'POST'])
-def tablica():
-    # таблица менделеева
-    user = flask_login.current_user
-    return render_template('tablica.html', user=user)
-            </code></pre>
-            <p>Также, конечно, нужно создать html файл со страницей, прежде чем вписывать это себе в код.</p>
-        </section>
-
-        <section id="чат">
-            <h2>Общий чат</h2>
-            <p>Общий чат предназначен для общения пользователей сайта. Здесь Вы можете искать новых друзей, найти решение своей проблемы, а также просто поделиться своими находками. Обязательное условие пользования чатом: авторизация на сайте.</p>
+            <p>Нужно создать html файл с таблицой и этого достаточно для ее отображения. Для таблиц в нативной версии не было использовано python-кода</p>
         </section>
 
         <section id="мини-игра">
@@ -961,19 +870,6 @@ def tablica():
                 <li>Если игрок набирает больше 50% правильных ответов, то он выигрывает. Иначе-проигрыш. 
             </ol>
         </section>
-        <section id="ошибки">
-            <h2>Коды ошибок и их значения</h2>
-            <p>Статус 0: Ошибок нет. Пользователь не видит этот код. </p>
-            <p>Статус 1: Такого пользователя не существует. Появляется на странице с авторизацией и обозначает то, что указанный в поле Логин имеет ошибку или такого пользователя нет в базе данных сайта. Необходимо проверить ошибку в написании логина или зарегистрироваться на сайте. </p>
-            <p>Статус 2: Неправильный пароль. Появляется также на странице с Логином. Причина в ошибке в пароле. Однако это означает, что такой аккаунт существует на сайте. </p>
-            <p>Статус 3: Попытка регистрации нового пользователя с похожим именем уже существующего аккаунта. Нужно изменить Логин(достаточно изменения на 1 символ).</p>
-            <p>Статус 4: Попытка регистрации с уже использованной электронной почтой. Такая почта есть в базе данных сайта. Нужно использовать другую. </p>
-            <p>Статус 5: Несовпадение пароля в полях "Пароль" и "Подтверждение пароля". Нужно просто перепроверить пароли и ввести заново. </p>
-            <p>Статус 6: Такой страницы не существует. Проверьте введенную ссылку.</p>
-            <p>Статус 7: Пользователя с таким логином не существует. Ошибка создана для страницы с удалением пользователей.</p>
-            <p>Статус 8: Ошибка при удалении профиля, возможно ошибка с базой данных, либо с удалением файлов, связанных с профилем.</p>
-            <p>Статус 9: Ошибка при сбросе статистики миниигры. Возможно ошибка с базой данных(вас нет в списке игроков, зайдите в миниигру для исправления) или ваша статистика уже была сброшена.</p>
-            </section>
 
         <section id="контакты">
             <h2>Контакты</h2>
@@ -988,8 +884,8 @@ def tablica():
     <div class="container">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link">Внимание! При использовании любых материалов сайта ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
-                <a class="nav-link" href="/aboutme">© 2024 ChemistryPRO. Все права защищены.</a>
+                <a class="nav-link">Внимание! При использовании любых материалов сайта и приложения ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
+                <a class="nav-link" href="/aboutme">© Гарипов Ф.Г, 2024</a>
             </li>
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -1009,7 +905,7 @@ def tablica():
     <div class="container">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link">Внимание! При использовании любых материалов сайта ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
+                <a class="nav-link">Внимание! При использовании любых материалов сайта и приложения ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
                 <a class="nav-link" href="/aboutme">© Гарипов Ф.Г, 2024</a>
             </li>
         </ul>

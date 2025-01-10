@@ -107,7 +107,7 @@
 <!-- навигация -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
     <div class="container">
-        <img src="/static/lab.svg" alt="" class="logo-image" width="32" height="32">
+        <img src="static/lab.svg" alt="" class="logo-image" width="32" height="32">
         <a class="navbar-brand" href="main.html">ChemistryPRO</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
@@ -204,6 +204,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="minigame.html"><i class="fa fa-gamepad"></i> Мини-Игра</a>
                 </li>
+                <br>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://chemistrypro.onrender.com/"><font color="gray">В Онлайн режим</font></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="info.html"><font color="gray">О приложении</font></a>
+                </li>
             </ul>
 </div>
 
@@ -241,7 +248,7 @@
         <div class="card p-4">
             <h3 class="text-center">Просмотр структуры вещества</h3>
             <h5 class="text-center">Введите название вещества</h5>
-            <h5 class="text-center"><a href="/uchebnik" target="_blank"><font color="blue"> Справочник по органической химии</font></a></h5>
+            <h5 class="text-center"><a href="uchebnik.html"><font color="blue"> Справочник по органической химии</font></a></h5>
             <form id="substanceForm" onsubmit="return false;">
             <div class="form-group">
                 <input type="text" id="substance_name" class="form-control" placeholder="Например: Бутан" required>
@@ -296,48 +303,6 @@ function displayResult(data) {
     </div>
 </body>
 </div>
-
-<!-- дополнительная навигационная панель -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-bottom d-none d-lg-flex" style="background-color: #55555e" id="additional-navbar">
-    <div class="container">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link">Внимание! При использовании любых материалов сайта ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
-                <a class="nav-link" href="/aboutme">© 2024 ChemistryPRO. Все права защищены.</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="https://t.me/dontcrymygirl">Telegram</a>
-                <a class="nav-link" href="https://vk.com/i_fanis_hello">ВКонтакте</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tel:89173969499">+79173969499</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<!-- Не фиксированная навигационная панель для мобильных устройств -->
-<nav class="navbar navbar-expand-lg navbar-dark d-lg-none" style="background-color: #55555e" id="additional_navbar2">
-    <div class="container">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link">Внимание! При использовании любых материалов сайта ChemistryPRO - укажите ссылку на сайт или соцсети автора сайта!</a>
-                <a class="nav-link" href="/aboutme">© Гарипов Ф.Г, 2024</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="https://t.me/dontcrymygirl">Telegram</a>
-                <a class="nav-link" href="https://vk.com/i_fanis_hello">ВКонтакте</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tel:89173969499">+79173969499</a>
-            </li>
-        </ul>
-    </div>
-</nav>
 
 <script>
     function toggleSidebar() {
