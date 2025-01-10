@@ -1,20 +1,17 @@
 import re
 from chempy import balance_stoichiometry
-import os
-import json
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import quote
 import random
-from datetime import datetime
 import webview
-#import webview.menu as wm
+#для пк мы импортируем меню
+import webview.menu as wm
 # импортируем все библиотеки
 
 h = ['']
 pravilno = 0
 otvety = 0
-
 
 class ChemistryCalculator:
     def molecular_mass(self, formula):
@@ -462,6 +459,7 @@ class ChemistryCalculator:
 
 
     def minigame(self, element):
+        global window
         def minigamefunc():
             # функция обработчик миниигры
             a = random.randint(0, 117)
@@ -594,6 +592,13 @@ class ChemistryCalculator:
             nazv = atomic_masses[b]
             print(b, nazv)
             return b, nazv
+
+
+        def win_page(window, right_percent):
+            window.evaluate_js(
+                f"window.location.replace('https://127.0.0.1:3000/winning.html?right_percent={right_percent}');")
+
+
         '''функция, которая возвращает страницу мини-игры
         Коротко о мини-игре:
         Это Игра для запоминания элементов таблицы Менделеева.
@@ -605,7 +610,7 @@ class ChemistryCalculator:
         nazv = res[1]
         h.append(nazv)
         if res:
-            if element == h[-2]:
+            if element.lower() == h[-2].lower() and element != '':
                 d = 'Верно, следующий'
                 pravilno += 1
                 otvety += 1
@@ -614,10 +619,15 @@ class ChemistryCalculator:
                     pravilno = 0
                     otvety = 0
                     if right_percent >= 50:
-                        win_page(window)
+                        win_page(window, right_percent)
                     else:
-                        print('Вы проиграли')
+                        win_page(window, right_percent)
                     h = ['']
+            elif element == 'start':
+                d = 'Введите ответ'
+            elif element == '':
+                d = f'Вы не ввели ответ, верный - {h[-2]}'
+                otvety += 1
             else:
                 d = f'Неправильно, ответ: {h[-2]}'
                 otvety += 1
@@ -679,49 +689,46 @@ class ChemistryCalculator:
         window.evaluate_js("window.location.replace('https://127.0.0.1:3000/main.html');")
 
 
-    def win_page(self, window):
-        window.evaluate_js("window.location.replace('https://127.0.0.1:3000/winning.html');")
+    def get_substance_html(self, substance_name):
+        # получение имени орг вещества из таблицы на сайте при помощи парсинга этой страницы
+        url = "https://chemer.ru/services/organic/structural"
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+        }
+        session = requests.Session()
+        session.headers.update(headers)
+        response = session.get(url)
+        global klass
+        klass = ''
+        namez = []
+
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            table = soup.find('table')
+            rows = table.find_all('tr')
+
+            for row in rows:
+                cols = row.find_all('td')
+                if cols:
+                    name = cols[0].text.strip()
+                    klass = cols[1].text.strip()
+                    link = cols[0].find('a')['href']
+                    if substance_name.lower() in name.lower() and substance_name.lower() == name.lower():
+                        substance_url = f"https://chemer.ru/services/organic/{link}"
+                        substance_response = session.get(substance_url)
+                        return substance_response.text, None
+                    elif substance_name.lower() in name.lower() and name.lower()[2:] != substance_name.lower():
+                        namez.append(name)
+                    elif substance_name.lower() in name.lower() and name.lower()[:2] == 'н-' and name.lower()[
+                                                                                                 2:] == substance_name.lower():
+                        substance_url = f"https://chemer.ru/services/organic/{link}"
+                        substance_response = session.get(substance_url)
+                        return substance_response.text, None
+        return None, namez
 
 
     def orghim(self, substance_name):
-        def get_substance_html(substance_name):
-            # получение имени орг вещества из таблицы на сайте при помощи парсинга этой страницы
-            url = "https://chemer.ru/services/organic/structural"
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-            }
-            session = requests.Session()
-            session.headers.update(headers)
-            response = session.get(url)
-            global klass
-            klass = ''
-            namez = []
-
-            if response.status_code == 200:
-                soup = BeautifulSoup(response.text, 'html.parser')
-                table = soup.find('table')
-                rows = table.find_all('tr')
-
-                for row in rows:
-                    cols = row.find_all('td')
-                    if cols:
-                        name = cols[0].text.strip()
-                        klass = cols[1].text.strip()
-                        link = cols[0].find('a')['href']
-                        if substance_name.lower() in name.lower() and substance_name.lower() == name.lower():
-                            substance_url = f"https://chemer.ru/services/organic/{link}"
-                            substance_response = session.get(substance_url)
-                            return substance_response.text, None
-                        elif substance_name.lower() in name.lower() and name.lower()[2:] != substance_name.lower():
-                            namez.append(name)
-                        elif substance_name.lower() in name.lower() and name.lower()[:2] == 'н-' and name.lower()[
-                                                                                                     2:] == substance_name.lower():
-                            substance_url = f"https://chemer.ru/services/organic/{link}"
-                            substance_response = session.get(substance_url)
-                            return substance_response.text, None
-            return None, namez
-
-        html_code, variants = get_substance_html(substance_name)
+        html_code, variants = self.get_substance_html(substance_name)
 
         if html_code:
             first_svg, isomers_svg, symbols_svg, names = self.extract_svg_and_symbols(html_code)
@@ -749,7 +756,6 @@ class ChemistryCalculator:
                         soup = BeautifulSoup(str(nazv), 'html.parser')
                         nazv = soup.a.text
                         combined.append((nazv.capitalize(), isomer_files[i]))
-
             return {
                 "svg_file": 'static/output.svg',
                 "isomer_files": isomer_files,
@@ -758,7 +764,6 @@ class ChemistryCalculator:
                 "combined": combined,
                 "variants": variants
             }
-
         return {
             "svg_file": None,
             "isomer_files": [],
@@ -768,27 +773,19 @@ class ChemistryCalculator:
             "variants": variants
         }
 
+
 def create_window():
     calculator = ChemistryCalculator()
+    global window
     window = webview.create_window('ChemistryPRO-APP', "templates/main.html", js_api=calculator, zoomable=True)
-
-    '''menu_items = [
+    # Для ПК-версии
+    menu_items = [
         wm.MenuAction('⌂', lambda: calculator.go_home(window)),
         wm.MenuAction('🡠', lambda: calculator.go_back(window)),
         wm.MenuAction('🡢', lambda: calculator.go_forward(window)),
-    ]'''
+    ]
 
-    def get_current_url(window):
-        # Добавляем обработчик события загрузки страницы в JavaScript
-        current_url = window.get_current_url()
-        print("Current URL:", current_url)
-        if 'minigame.html' in current_url:
-            calculator.minigame('')
-
-        window.evaluate_js('window.location.href')
-
-
-    webview.start(get_current_url, window, ssl=True, http_port=3000)
+    webview.start(ssl=True, http_port=3000, menu=menu_items)
 
 
 if __name__ == '__main__':
